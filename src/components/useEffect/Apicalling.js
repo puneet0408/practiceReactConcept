@@ -1,3 +1,4 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -12,9 +13,13 @@ const Home = () =>{
     }
 
     return(
-        <div onClick={GotoPostPage} >
-         hhhh
+        <div>
+
+<div onClick={GotoPostPage} >
         </div>
+        its me for it 
+        </div>
+      
     )
  
 }
