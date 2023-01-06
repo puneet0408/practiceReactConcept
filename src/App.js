@@ -7,16 +7,18 @@ import './App.css';
 //import UseEffect from "./components/useEffect/useEffect"
 //import Posts from "./components/useEffect/posts"
 // import Effect from './components/useEffect/effect';
-import Users from "./components/useEffect/user"
-import {
-  Routes,
-  Route,
+//import Users from "./components/useEffect/user"
+//import Reducer from "./components/useReducer/usereducer"
+import Form from "./components/useReducer/form"
+// import {
+//   Routes,
+//   Route,
 
-} from "react-router-dom";
+// } from "react-router-dom";
 function App() {
   return (
     <div>
-      <Users/>
+      <Form/>
       {/* <Routes>
       <Route path='/' element={<Calling />} />
           <Route path='/posts' element={<Posts />} />
