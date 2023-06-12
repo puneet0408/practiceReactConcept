@@ -8,8 +8,9 @@ import './App.css';
 //import Posts from "./components/useEffect/posts"
 // import Effect from './components/useEffect/effect';
 //import Users from "./components/useEffect/user"
+import Products from './Products/products.js';
 //import Reducer from "./components/useReducer/usereducer"
-import Form from "./components/useReducer/form"
+//import Form from "./components/useReducer/form"
 // import {
 //   Routes,
 //   Route,
@@ -18,7 +19,7 @@ import Form from "./components/useReducer/form"
 function App() {
   return (
     <div>
-      <Form/>
+      <Products/>
       {/* <Routes>
       <Route path='/' element={<Calling />} />
           <Route path='/posts' element={<Posts />} />
