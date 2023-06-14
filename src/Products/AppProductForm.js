@@ -1,7 +1,22 @@
-import React, { useState } from "react";
+import React, { useImperativeHandle, useRef, useState } from "react";
 import { useEffect } from "react";
+import useProductDidpatch from "./hooks/Dispatch";
+import { forwardRef } from "react";
+ 
 
-function AddProduct({ AddProductToDb, editableProduct , UpdateProduct }) {
+const AddProduct = forwardRef(function AddProduct({ editableProduct }, ref) {
+  const dispatch = useProductDidpatch();
+
+  const iRef = useRef(null);
+
+  useImperativeHandle(ref, () => {
+    return {
+      focus() {
+        iRef.current.focus();
+      },
+    };
+  });
+
   const initialState = {
     Machine: "",
     materialName: "",
@@ -13,10 +28,10 @@ function AddProduct({ AddProductToDb, editableProduct , UpdateProduct }) {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(editableProduct){
-        UpdateProduct(product)
-    }else{
-    AddProductToDb(product);  
+    if (editableProduct) {
+      dispatch({ type: "UPDATE", payload: product });
+    } else {
+      dispatch({ type: "ADD", payload: product });
     }
     setProduct(initialState);
   };
@@ -31,6 +46,7 @@ function AddProduct({ AddProductToDb, editableProduct , UpdateProduct }) {
     <div>
       <div>
         <input
+          ref={iRef}
           type="text"
           onChange={handleChange}
           name="Machine"
@@ -38,16 +54,21 @@ function AddProduct({ AddProductToDb, editableProduct , UpdateProduct }) {
           value={product.Machine}
         />
         <input
+          ref={ref}
           type="text"
           onChange={handleChange}
           name="materialName"
           placeholder="MaterialName"
           value={product.materialName}
         />
-        <button onClick={handleSubmit}>{editableProduct?"edit":"Add"} Product</button>
+        <button onClick={handleSubmit}>
+          {editableProduct ? "edit" : "Add"} Product
+        </button>
+
+       
       </div>
     </div>
   );
-}
+});
 
 export default AddProduct;

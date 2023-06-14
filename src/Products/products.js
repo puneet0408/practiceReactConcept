@@ -1,43 +1,59 @@
-import React from "react";
+import React, { useReducer, useRef } from "react";
 import Data from "./data";
 import AddProductForm from "./AppProductForm";
 import ProductList from "./productList";
 import { useState } from "react";
+import ProductContext from "./context/productContext";
+import ProductDispatchContext from "./context/ProductDispatchContext";
 
 function Products() {
-  const [ProductDb, setProductDb] = useState(Data);
-  const [editableProduct , setEditableProduct] = useState(null)
+  const [editableProduct, setEditableProduct] = useState(null);
 
-  function AddProducts(Product) {
-    setProductDb([...ProductDb, { ...Product, key: ProductDb.length + 1 }]);
+  function vedioReducer(ProductDb, action) {
+    switch (action.type) {
+      case "LOAD":
+        return action.payload;
+      case "ADD":
+        return [...ProductDb, { ...action.payload, key: ProductDb.length + 1 }];
+      case "DELETE":
+        return ProductDb.filter((item) => item.key !== action.payload);
+      case "UPDATE":
+        const Index = ProductDb.findIndex(
+          (prod) => prod.key === action.payload.key
+        );
+        const newProduct = [...ProductDb];
+        newProduct.splice(Index, 1, action.payload);
+        setEditableProduct(null);
+        return newProduct;
+      default:
+        return ProductDb;
+    }
   }
 
-  const DeleteProduct = (id) => {
-    const RemaningProduct = ProductDb.filter((item) => item.key !== id);
-    setProductDb(RemaningProduct);
-  };
+  const [ProductDb, dispatch] = useReducer(vedioReducer, Data);
+
   const editProduct = (id) => {
-    setEditableProduct(ProductDb.find((prod)=>prod.key===id))
-  
+    setEditableProduct(ProductDb.find((prod) => prod.key === id));
   };
 
-  function UpdateProduct(Product){
-    const Index = ProductDb.findIndex((prod)=>prod.key===Product.key)
-    const newProduct = [...ProductDb];
-    newProduct.splice(Index , 1, Product)
-    setProductDb(newProduct)
+  const ref = useRef("");
+
+  
+
+  function handleClick(){
+    ref.current.focus();
   }
 
   return (
-    <div>
-        
-        <AddProductForm UpdateProduct={UpdateProduct} editableProduct={editableProduct} AddProductToDb={AddProducts} />
-      <ProductList
-        editProduct={editProduct}
-        deleteProduct={DeleteProduct}
-        ProductDb={ProductDb}
-      />
-    </div>
+    <ProductContext.Provider value={ProductDb}>
+      <ProductDispatchContext.Provider value={dispatch}>
+        <div>
+        <button onClick={handleClick} >Focus</button>
+          <AddProductForm ref={ref} editableProduct={editableProduct} />
+          <ProductList editProduct={editProduct} />
+        </div>
+      </ProductDispatchContext.Provider>
+    </ProductContext.Provider>
   );
 }
 

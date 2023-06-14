@@ -28,6 +28,7 @@ return(
     type="number"
     />
     <span> Total:{sum} </span>
+    {text}
     </div>
 )
 }

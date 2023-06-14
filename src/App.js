@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+
+//import Apps from './components/performanceHook/App';
 //import Calling from "./components/useEffect/Apicalling"
 //import Navbar from "./components/useEffect/navbar"
 // import UseMemo from './components/usememo';

@@ -17,10 +17,10 @@ function App() {
 
     return (
         <div>
-            <input onChange={() => setName(e.target.value)}
+            <input onChange={(e) => setName(e.target.value)}
                 placeholder="age
             " />
-            <input onChange={() => setAge(e.target.value)}
+            <input onChange={(e) => setAge(e.target.value)}
                 placeholder="number"
             />
 
