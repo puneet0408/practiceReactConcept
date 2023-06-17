@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 
+import Apps from "./reduxToolkit/App";
 //import Apps from './components/performanceHook/App';
 //import Calling from "./components/useEffect/Apicalling"
 //import Navbar from "./components/useEffect/navbar"
@@ -10,7 +11,7 @@ import './App.css';
 //import Posts from "./components/useEffect/posts"
 // import Effect from './components/useEffect/effect';
 //import Users from "./components/useEffect/user"
-import Products from './Products/products.js';
+//import Products from './Products/products.js';
 //import Reducer from "./components/useReducer/usereducer"
 //import Form from "./components/useReducer/form"
 // import {
@@ -21,7 +22,7 @@ import Products from './Products/products.js';
 function App() {
   return (
     <div>
-      <Products/>
+      <Apps/>
       {/* <Routes>
       <Route path='/' element={<Calling />} />
           <Route path='/posts' element={<Posts />} />
